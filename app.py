@@ -19,8 +19,8 @@ allowed = j.get("origine_stockage")
 level = j.get("level")
 port = j.get("port")
 
-@app.route('/mail', defaults={'subpath': ''}, methods=['GET','PUT','DELETE','PATCH'])
-@app.route('/mail/<path:subpath>', methods=['GET','PUT','DELETE','PATCH'])
+@app.route('/', defaults={'subpath': ''}, methods=['GET','PUT','DELETE','PATCH'])
+@app.route('/<path:subpath>', methods=['GET','PUT','DELETE','PATCH'])
 def route(subpath):
     # Récupérer la méthode et le chemin complet
     if level == "nothing":
