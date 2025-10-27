@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import requests
+import logging
 
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
