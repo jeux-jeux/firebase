@@ -122,6 +122,22 @@ def route(subpath):
         return jsonify(bits_json)
     else:
         return jsonify({"Message":"Acces refusé"})
+
+
+@app.route("/wake", methods=["POST"])
+def wake():
+    data = request.get_json(force=True, silent=True) or {}
+    cle_received = data.get('cle')
+    if cle_received:
+        resp = requests.post(f"{URL}cle-ultra", json={"cle": cle_received}, timeout=5 )
+        resp.raise_for_status()
+        j = resp.json()
+        access = j.get("access")
+        if not access == "false":
+            return jsonify({"status": "ok"})
+    return jsonify({"status": "error", "message": "clé invalide"})
+
+
 if __name__ == '__main__':
     port = int(port)
     print(f"⚡️ Proxy firebase actif sur le port {port}")
